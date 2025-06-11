@@ -1,0 +1,63 @@
+CREATE DATABASE AddressBookDB;
+GO
+
+USE AddressBookDB;
+GO
+
+CREATE TABLE Cities (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    ZipCode NVARCHAR(20) NOT NULL,
+    Name NVARCHAR(100) NOT NULL
+);
+GO
+
+CREATE TABLE Contacts (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    BirthDate DATETIME NOT NULL,
+    PhoneNumber NVARCHAR(20),
+    IsActive BIT NOT NULL,
+    CityId INT NOT NULL,
+    CONSTRAINT FK_Contacts_Cities FOREIGN KEY (CityId) REFERENCES Cities(Id)
+);
+GO
+
+INSERT INTO Cities (ZipCode, Name) VALUES
+('00-001', 'Warszawa'),
+('31-002', 'Kraków'),
+('50-003', 'Wrocław'),
+('60-004', 'Poznań'),
+('80-005', 'Gdańsk'),
+('90-006', 'Łódź'),
+('70-007', 'Szczecin'),
+('85-008', 'Bydgoszcz'),
+('75-009', 'Koszalin'),
+('40-010', 'Katowice'),
+('41-011', 'Chorzów'),
+('42-012', 'Częstochowa'),
+('35-013', 'Rzeszów'),
+('20-014', 'Lublin'),
+('45-015', 'Opole');
+GO
+
+INSERT INTO Contacts (FirstName, LastName, BirthDate, PhoneNumber, IsActive, CityId) VALUES
+('Jan', 'Kowalski', '1990-01-15', '600123456', 1, 1),
+('Anna', 'Nowak', '1985-06-10', '601234567', 1, 3),
+('Piotr', 'Wiśniewski', '1992-09-20', '602345678', 0, 5),
+('Maria', 'Wójcik', '1980-12-01', '603456789', 1, 2),
+('Tomasz', 'Kaczmarek', '1975-03-30', '604567890', 1, 4);
+GO
+
+CREATE VIEW ContactView AS
+SELECT 
+    c.Id,
+    c.FirstName,
+    c.LastName,
+    c.PhoneNumber,
+    c.BirthDate,
+    c.IsActive,
+    ci.Name AS CityName,
+    ci.ZipCode
+FROM Contacts c
+JOIN Cities ci ON c.CityId = ci.Id;
