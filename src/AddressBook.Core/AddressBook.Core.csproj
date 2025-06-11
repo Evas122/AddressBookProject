@@ -4,10 +4,4 @@
     <TargetFramework>net4.8</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\Mappings\" />
-    <Folder Include="Interfaces\Repositories\" />
-    <Folder Include="Interfaces\Services\" />
-  </ItemGroup>
-
 </Project>

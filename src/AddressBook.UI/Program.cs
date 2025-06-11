@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AddressBook.Infrastructure.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows.Forms;
 
 namespace AdressBook
@@ -16,7 +15,17 @@ namespace AdressBook
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+
+            var services = new ServiceCollection();
+
+            services.AddInfrastructure();
+            services.AddScoped<MainForm>();
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            var mainForm = serviceProvider.GetRequiredService<MainForm>();
+
+            Application.Run(mainForm);
         }
     }
 }
