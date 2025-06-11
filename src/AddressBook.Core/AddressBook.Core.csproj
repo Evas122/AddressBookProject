@@ -2,14 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net4.8</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Dtos\" />
-    <Folder Include="Extensions\" />
+    <Folder Include="Extensions\Mappings\" />
     <Folder Include="Interfaces\Repositories\" />
     <Folder Include="Interfaces\Services\" />
   </ItemGroup>
